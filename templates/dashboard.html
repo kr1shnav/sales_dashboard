@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <header class="top-bar">
+    <div class="header-content">
+        <h1><i class="fas fa-chart-pie"></i> Sales Analytics</h1>
+        <a href="/logout" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</header>
+
+    <main class="container">
+        <section class="card chart-card">
+            <div class="card-header">
+                <h3>Revenue Overview</h3>
+            </div>
+            <div class="chart-container">
+                <canvas id="salesChart"></canvas>
+            </div>
+        </section>
+
+        <div class="form-grid">
+            <section class="card">
+                <h3><i class="fas fa-plus-circle"></i> Add Product</h3>
+                <form action="/add_product" method="post" class="styled-form">
+                    <div class="field">
+                        <label>Product Name</label>
+                        <input name="name" placeholder="e.g. Wireless Mouse" required>
+                    </div>
+                    <div class="field">
+                        <label>Category</label>
+                        <input name="category" placeholder="e.g. Electronics" required>
+                    </div>
+                    <div class="field">
+                        <label>Price ($)</label>
+                        <input name="price" type="number" step="0.01" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Add Product</button>
+                </form>
+            </section>
+
+            <section class="card">
+                <h3><i class="fas fa-shopping-cart"></i> Log New Sale</h3>
+                <form action="/add_sale" method="post" class="styled-form">
+                    <div class="field">
+                        <label>Date</label>
+                        <input type="date" name="date" required>
+                    </div>
+                    <div class="field">
+                        <label>Select Product</label>
+                        <select name="product" id="productSelect" required>
+                            <option value="" disabled selected>Choose a product...</option>
+                            </select>
+                    </div>
+                    <div class="field">
+                        <label>Quantity</label>
+                        <input type="number" name="quantity" min="1" required>
+                    </div>
+                    <button type="submit" class="btn-success">Record Sale</button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script>
+    // Injected backend data
+    const productData = {{ products | tojson }};
+    const labels = {{ months | tojson }};
+    const revenue = {{ revenue | tojson }};
+
+    // Populate product dropdown
+    const select = document.getElementById('productSelect');
+    productData.forEach(prod => {
+        let opt = document.createElement('option');
+        opt.value = prod.id;
+        opt.textContent = prod.name;
+        select.appendChild(opt);
+    });
+
+    // Revenue chart
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Sales Revenue',
+                data: revenue,
+                borderColor: '#4361ee',
+                backgroundColor: 'rgba(67,97,238,0.15)',
+                fill: true,
+                tension: 0.3
+            }]
+        }
+    });
+</script>
+
+</body>
+</html>

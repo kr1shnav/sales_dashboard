@@ -1,0 +1,242 @@
+/* --- Global Variables & Theme --- */
+:root {
+    --primary: #4361ee;
+    --primary-glow: rgba(67, 97, 238, 0.15);
+    --accent: #4895ef;
+    --success: #2ec4b6;
+    --bg-main: #f8fafc;
+    --card-bg: #ffffff;
+    --text-header: #0f172a;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    --shadow-bold: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* --- Base Layout --- */
+* {
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+}
+
+body {
+    background: radial-gradient(at top left, #f8fafc, #eff6ff);
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--text-body);
+    margin: 0;
+    padding-bottom: 40px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header / Top Bar --- */
+.top-bar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.top-bar h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-header);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.top-bar i {
+    color: var(--primary);
+}
+
+/* --- Card System --- */
+.card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-bold);
+    transform: translateY(-2px);
+}
+
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+    color: var(--text-header);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card h3 i {
+    color: var(--primary);
+    opacity: 0.8;
+}
+
+/* --- Dashboard Grid --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+/* --- Chart Section --- */
+.chart-card {
+    grid-column: 1 / -1;
+}
+
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* --- Form Elements --- */
+.styled-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-header);
+    margin-bottom: 0.5rem;
+}
+
+input, select {
+    padding: 0.8rem 1rem;
+    background: var(--bg-main);
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    color: var(--text-header);
+}
+
+input:focus, select:focus {
+    background: #fff;
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+/* --- Buttons --- */
+button {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    color: white;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, var(--success) 0%, #29ad9f 100%);
+    box-shadow: 0 4px 12px rgba(46, 196, 182, 0.25);
+}
+
+button:hover {
+    filter: brightness(1.05);
+    transform: scale(1.01);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* 1. Fix the Parent Container */
+.top-bar {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 0.75rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-content {
+    max-width: 1200px; /* Match your container width */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between; /* Pushes title left and button right */
+    align-items: center; /* This is the "magic" that aligns them vertically */
+}
+
+.top-bar h1 {
+    margin: 0;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 2. Refined Logout Button */
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(220, 38, 38, 0.05);
+    color: #dc2626;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid rgba(220, 38, 38, 0.1);
+    transition: all 0.2s ease;
+    /* Removed float: right; as Flexbox handles this now */
+}
+
+.logout-btn i {
+    color: inherit; /* Fixes the blue icon issue */
+    font-size: 0.9rem;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}

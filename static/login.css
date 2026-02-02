@@ -1,0 +1,172 @@
+/* Custom Variables for a Modern Palette */
+:root {
+    --primary: #4361ee;
+    --primary-glow: rgba(67, 97, 238, 0.3);
+    --accent: #4895ef;
+    --success: #2ec4b6;
+    --bg-main: #f8fafc;
+    --card-bg: #ffffff;
+    --text-header: #0f172a;
+    --text-body: #475569;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    --shadow-bold: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Global Reset & Smooth Scroll */
+* {
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+}
+
+body {
+    background: radial-gradient(at top left, #f8fafc, #eff6ff); /* Subtle depth */
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--text-body);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Auth Page Centering */
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Card Styling with Glassmorphism hints */
+.card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 2.5rem;
+    backdrop-filter: blur(10px); /* Works if parent has background */
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    transform: translateY(0);
+}
+
+.auth-card:hover {
+    box-shadow: var(--shadow-bold);
+    transform: translateY(-4px); /* Subtle hover lift */
+}
+
+/* Typography Refinements */
+h2 {
+    color: var(--text-header);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Input Group & Icon Styling */
+.field {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-header);
+    margin-bottom: 0.5rem;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.8rem; /* Space for icon */
+    background: var(--bg-main);
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    color: var(--text-header);
+}
+
+input:focus {
+    background: #fff;
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+input::placeholder {
+    color: #cbd5e1;
+}
+
+/* Button with Gradient & Animation */
+button {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    color: white;
+    padding: 0.9rem;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+}
+
+button:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 6px 18px rgba(67, 97, 238, 0.4);
+    transform: scale(1.01);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Footer & Links */
+.auth-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.auth-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Dashboard Specifics */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
