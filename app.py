@@ -8,7 +8,6 @@ app.secret_key = "supersecretkey"
 def get_db():
     return sqlite3.connect("database.db")
 
-# ------------------ DATABASE SETUP ------------------
 with get_db() as conn:
     c = conn.cursor()
 
@@ -43,7 +42,6 @@ with get_db() as conn:
 
     conn.commit()
 
-# ------------------ DASHBOARD ------------------
 @app.route("/")
 def dashboard():
     if "user_id" not in session:
@@ -75,7 +73,6 @@ def dashboard():
         revenue=revenue
     )
 
-# ------------------ ADD PRODUCT ------------------
 @app.route("/add_product", methods=["POST"])
 def add_product():
     data = request.form
@@ -86,7 +83,6 @@ def add_product():
         )
     return redirect("/")
 
-# ------------------ ADD SALE ------------------
 @app.route("/add_sale", methods=["POST"])
 def add_sale():
     if "user_id" not in session:
@@ -117,7 +113,6 @@ def add_sale():
 
     return redirect("/")
 
-# ------------------ SIGNUP ------------------
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     error = None
@@ -141,7 +136,6 @@ def signup():
 
     return render_template("signup.html", error=error)
 
-# ------------------ LOGIN ------------------
 @app.route("/login", methods=["GET", "POST"])
 def login():
     error = None
@@ -165,7 +159,6 @@ def login():
 
     return render_template("login.html", error=error)
 
-# ------------------ LOGOUT ------------------
 @app.route("/logout")
 def logout():
     session.clear()
