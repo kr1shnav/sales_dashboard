@@ -1,172 +1,256 @@
-/* Custom Variables for a Modern Palette */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 :root {
-    --primary: #4361ee;
-    --primary-glow: rgba(67, 97, 238, 0.3);
-    --accent: #4895ef;
-    --success: #2ec4b6;
-    --bg-main: #f8fafc;
-    --card-bg: #ffffff;
-    --text-header: #0f172a;
-    --text-body: #475569;
-    --text-muted: #94a3b8;
-    --border-color: #e2e8f0;
-    --radius-lg: 16px;
-    --radius-md: 12px;
-    --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-    --shadow-bold: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-glow: rgba(99, 102, 241, 0.25);
+    --navy-900: #0f1117;
+    --navy-800: #161b27;
+    --navy-700: #1e2535;
+    --navy-600: #252d3d;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border: rgba(255, 255, 255, 0.08);
+    --radius-xl: 20px;
+    --radius-md: 10px;
 }
 
-/* Global Reset & Smooth Scroll */
-* {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-    transition: all 0.2s ease-in-out;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    background: radial-gradient(at top left, #f8fafc, #eff6ff); /* Subtle depth */
     font-family: 'Inter', -apple-system, sans-serif;
-    color: var(--text-body);
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* Auth Page Centering */
-.auth-page {
+    background: var(--navy-900);
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Card Styling with Glassmorphism hints */
-.card {
-    background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
-    padding: 2.5rem;
-    backdrop-filter: blur(10px); /* Works if parent has background */
+/* Decorative background glows */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
 }
 
-.auth-card {
+body::before {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, transparent 70%);
+    top: -100px;
+    left: -100px;
+}
+
+body::after {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, transparent 70%);
+    bottom: -80px;
+    right: -60px;
+}
+
+/* ── Auth Container ── */
+.auth-container {
+    position: relative;
+    z-index: 1;
     width: 100%;
     max-width: 420px;
-    transform: translateY(0);
+    padding: 1rem;
 }
 
-.auth-card:hover {
-    box-shadow: var(--shadow-bold);
-    transform: translateY(-4px); /* Subtle hover lift */
+.card.auth-card {
+    background: var(--navy-800);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 2.5rem 2.25rem;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Typography Refinements */
-h2 {
-    color: var(--text-header);
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Auth Header ── */
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo-icon {
+    width: 62px;
+    height: 62px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    font-size: 1.5rem;
+    color: white;
+    box-shadow: 0 8px 24px var(--primary-glow);
+}
+
+.auth-header h2 {
+    font-size: 1.6rem;
     font-weight: 800;
-    letter-spacing: -0.025em;
-    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.35rem;
 }
 
 .auth-header p {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.88rem;
 }
 
-/* Input Group & Icon Styling */
-.field {
+/* ── Error Alert ── */
+.error-alert {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #fca5a5;
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    text-align: center;
     margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* ── Form ── */
+.styled-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
 }
 
 label {
-    display: block;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    color: var(--text-header);
-    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.4rem;
 }
 
-.input-wrapper {
+.input-with-icon {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.input-wrapper i {
+.input-with-icon i {
     position: absolute;
     left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    pointer-events: none;
+    transition: color 0.2s;
+}
+
+.input-with-icon input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.75rem;
+    background: var(--navy-700);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+.input-with-icon input::placeholder {
     color: var(--text-muted);
 }
 
-input {
-    width: 100%;
-    padding: 0.8rem 1rem 0.8rem 2.8rem; /* Space for icon */
-    background: var(--bg-main);
-    border: 1.5px solid var(--border-color);
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-    color: var(--text-header);
-}
-
-input:focus {
-    background: #fff;
-    border-color: var(--primary);
+.input-with-icon input:focus {
     outline: none;
-    box-shadow: 0 0 0 4px var(--primary-glow);
+    border-color: var(--primary);
+    background: var(--navy-600);
+    box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
-input::placeholder {
-    color: #cbd5e1;
+.input-with-icon input:focus+i,
+.input-with-icon:focus-within i {
+    color: var(--primary);
 }
 
-/* Button with Gradient & Animation */
-button {
-    width: 100%;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+/* ── Button ── */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
     padding: 0.9rem;
     border: none;
     border-radius: var(--radius-md);
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: inherit;
     cursor: pointer;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+    box-shadow: 0 4px 16px var(--primary-glow);
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
 }
 
-button:hover {
+.btn-primary:hover {
     filter: brightness(1.1);
-    box-shadow: 0 6px 18px rgba(67, 97, 238, 0.4);
-    transform: scale(1.01);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px var(--primary-glow);
 }
 
-button:active {
+.btn-primary:active {
     transform: scale(0.98);
 }
 
-/* Footer & Links */
+/* ── Footer ── */
 .auth-footer {
     text-align: center;
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
+    margin-top: 1.75rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
 }
 
 .auth-footer a {
-    color: var(--primary);
-    text-decoration: none;
+    color: #a5b4fc;
     font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
 .auth-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Dashboard Specifics */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
-    padding: 2rem;
+    color: white;
 }

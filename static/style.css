@@ -1,119 +1,266 @@
-/* --- Global Variables & Theme --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
 :root {
-    --primary: #4361ee;
-    --primary-glow: rgba(67, 97, 238, 0.15);
-    --accent: #4895ef;
-    --success: #2ec4b6;
-    --bg-main: #f8fafc;
-    --card-bg: #ffffff;
-    --text-header: #0f172a;
-    --text-body: #475569;
-    --text-muted: #94a3b8;
-    --border-color: #e2e8f0;
-    --radius-lg: 16px;
-    --radius-md: 12px;
-    --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-    --shadow-bold: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-glow: rgba(99, 102, 241, 0.2);
+    --success: #10b981;
+    --success-glow: rgba(16, 185, 129, 0.2);
+    --danger: #ef4444;
+
+    --navy-900: #0f1117;
+    --navy-800: #161b27;
+    --navy-700: #1e2535;
+    --navy-600: #252d3d;
+    --navy-500: #2e3a52;
+
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border: rgba(255, 255, 255, 0.07);
+    --border-light: rgba(255, 255, 255, 0.11);
+
+    --radius-xl: 20px;
+    --radius-lg: 14px;
+    --radius-md: 10px;
+    --radius-sm: 6px;
+
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.35);
+    --shadow-glow: 0 0 40px rgba(99, 102, 241, 0.15);
+    --transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* --- Base Layout --- */
-* {
+/* ═══════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════ */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
-    transition: all 0.2s ease-in-out;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    background: radial-gradient(at top left, #f8fafc, #eff6ff);
     font-family: 'Inter', -apple-system, sans-serif;
-    color: var(--text-body);
-    margin: 0;
-    padding-bottom: 40px;
+    background: var(--navy-900);
+    color: var(--text-secondary);
+    min-height: 100vh;
+    line-height: 1.6;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* --- Header / Top Bar --- */
+/* ═══════════════════════════════════════════
+   TOP BAR / HEADER
+═══════════════════════════════════════════ */
 .top-bar {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    padding: 1.25rem 2rem;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 2rem;
+    background: rgba(15, 17, 23, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 64px;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200;
+}
+
+.header-content {
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
 }
 
 .top-bar h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: var(--text-header);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
+    letter-spacing: -0.02em;
 }
 
-.top-bar i {
+.top-bar h1 i {
     color: var(--primary);
+    font-size: 1.1rem;
 }
 
-/* --- Card System --- */
-.card {
-    background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
-    padding: 1.75rem;
-    margin-bottom: 1.5rem;
-}
-
-.card:hover {
-    box-shadow: var(--shadow-bold);
-    transform: translateY(-2px);
-}
-
-.card h3 {
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    font-size: 1.15rem;
-    color: var(--text-header);
+.user-info {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.card h3 i {
-    color: var(--primary);
-    opacity: 0.8;
+.user-info>span {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    padding: 0 4px;
 }
 
-/* --- Dashboard Grid --- */
+/* ═══════════════════════════════════════════
+   NAV BUTTONS (HEADER)
+═══════════════════════════════════════════ */
+.analytics-btn,
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 1px solid transparent;
+    white-space: nowrap;
+}
+
+.analytics-btn {
+    background: rgba(99, 102, 241, 0.12);
+    color: #a5b4fc;
+    border-color: rgba(99, 102, 241, 0.25);
+}
+
+.analytics-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.logout-btn {
+    background: rgba(239, 68, 68, 0.1);
+    color: #fca5a5;
+    border-color: rgba(239, 68, 68, 0.2);
+}
+
+.logout-btn i {
+    color: inherit;
+}
+
+.logout-btn:hover {
+    background: var(--danger);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* ═══════════════════════════════════════════
+   MAIN LAYOUT
+═══════════════════════════════════════════ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 3rem;
+}
+
+/* ═══════════════════════════════════════════
+   ANALYTICS CTA BANNER
+═══════════════════════════════════════════ */
+.analytics-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(99, 102, 241, 0.04));
+    border: 1px solid rgba(99, 102, 241, 0.22);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.analytics-cta i {
+    color: var(--primary);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.analytics-cta a {
+    color: #a5b4fc;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: var(--transition);
+}
+
+.analytics-cta a:hover {
+    color: white;
+}
+
+/* ═══════════════════════════════════════════
+   CARDS
+═══════════════════════════════════════════ */
+.card {
+    background: var(--navy-800);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+}
+
+.card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card), var(--shadow-glow);
+}
+
+.card h3 {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+}
+
+.card h3 i {
+    color: var(--primary);
+    opacity: 0.9;
+}
+
+/* ═══════════════════════════════════════════
+   FORM GRID (dashboard two-column)
+═══════════════════════════════════════════ */
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     gap: 1.5rem;
 }
 
-/* --- Chart Section --- */
-.chart-card {
-    grid-column: 1 / -1;
-}
-
-.chart-container {
-    position: relative;
-    height: 300px;
-    width: 100%;
-}
-
-/* --- Form Elements --- */
+/* ═══════════════════════════════════════════
+   FORM ELEMENTS
+═══════════════════════════════════════════ */
 .styled-form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.1rem;
 }
 
 .field {
@@ -122,121 +269,109 @@ body {
 }
 
 label {
-    font-size: 0.875rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    color: var(--text-header);
-    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.45rem;
 }
 
-input, select {
-    padding: 0.8rem 1rem;
-    background: var(--bg-main);
-    border: 1.5px solid var(--border-color);
+input,
+select {
+    background: var(--navy-700);
+    border: 1.5px solid var(--border);
     border-radius: var(--radius-md);
-    font-size: 1rem;
-    color: var(--text-header);
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-family: inherit;
+    transition: var(--transition);
+    -webkit-appearance: none;
+    appearance: none;
 }
 
-input:focus, select:focus {
-    background: #fff;
-    border-color: var(--primary);
+input::placeholder {
+    color: var(--text-muted);
+}
+
+select option {
+    background: var(--navy-700);
+}
+
+input:focus,
+select:focus {
     outline: none;
-    box-shadow: 0 0 0 4px var(--primary-glow);
+    border-color: var(--primary);
+    background: var(--navy-600);
+    box-shadow: 0 0 0 3px var(--primary-glow);
 }
 
-/* --- Buttons --- */
+/* ═══════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════ */
 button {
     width: 100%;
-    padding: 0.9rem;
+    padding: 0.85rem;
     border: none;
     border-radius: var(--radius-md);
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: inherit;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
     color: white;
+    letter-spacing: 0.01em;
+    transition: var(--transition);
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px var(--primary-glow);
 }
 
 .btn-success {
-    background: linear-gradient(135deg, var(--success) 0%, #29ad9f 100%);
-    box-shadow: 0 4px 12px rgba(46, 196, 182, 0.25);
+    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+    box-shadow: 0 4px 16px var(--success-glow);
 }
 
-button:hover {
-    filter: brightness(1.05);
-    transform: scale(1.01);
+.btn-success:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px var(--success-glow);
 }
 
 button:active {
     transform: scale(0.98);
+    filter: brightness(0.95);
 }
 
-/* 1. Fix the Parent Container */
-.top-bar {
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    padding: 0.75rem 2rem;
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.header-content {
-    max-width: 1200px; /* Match your container width */
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between; /* Pushes title left and button right */
-    align-items: center; /* This is the "magic" that aligns them vertically */
-}
-
-.top-bar h1 {
-    margin: 0;
-    font-size: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-/* 2. Refined Logout Button */
-.logout-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 12px;
-    background: rgba(220, 38, 38, 0.05);
-    color: #dc2626;
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-radius: 8px;
-    border: 1px solid rgba(220, 38, 38, 0.1);
-    transition: all 0.2s ease;
-    /* Removed float: right; as Flexbox handles this now */
-}
-
-.logout-btn i {
-    color: inherit; /* Fixes the blue icon issue */
-    font-size: 0.9rem;
-}
-
-.logout-btn:hover {
-    background: #dc2626;
-    color: white;
-    transform: translateY(-1px);
-}
-
-/* Responsive adjustments */
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
 @media (max-width: 768px) {
     .form-grid {
         grid-template-columns: 1fr;
+    }
+
+    .top-bar {
+        padding: 0 1rem;
+    }
+
+    .container {
+        padding: 1.5rem 1rem 2rem;
+    }
+
+    .user-info>span {
+        display: none;
     }
 }

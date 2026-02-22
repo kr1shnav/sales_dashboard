@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Sales Dashboard</title>
+    <title>Sign In | Sales Dashboard</title>
     <link rel="stylesheet" href="/static/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="auth-page">
+
+<body>
 
     <div class="auth-container">
         <div class="card auth-card">
+
             <div class="auth-header">
                 <div class="logo-icon">
                     <i class="fas fa-chart-line"></i>
                 </div>
                 <h2>Welcome Back</h2>
-                <p>Please enter your details to sign in</p>
+                <p>Sign in to your dashboard</p>
             </div>
+
+            {% if error %}
+            <div class="error-alert">
+                <i class="fas fa-exclamation-circle"></i> {{ error }}
+            </div>
+            {% endif %}
 
             <form method="post" class="styled-form">
                 <div class="field">
@@ -27,7 +36,6 @@
                         <input name="username" placeholder="Enter your username" required>
                     </div>
                 </div>
-
                 <div class="field">
                     <label>Password</label>
                     <div class="input-with-icon">
@@ -35,15 +43,18 @@
                         <input type="password" name="password" placeholder="••••••••" required>
                     </div>
                 </div>
-
-                <button type="submit" class="btn-primary">Sign In</button>
+                <button type="submit" class="btn-primary">
+                    <i class="fas fa-sign-in-alt"></i> Sign In
+                </button>
             </form>
 
             <footer class="auth-footer">
                 <p>Don't have an account? <a href="/signup">Create account</a></p>
             </footer>
+
         </div>
     </div>
 
 </body>
+
 </html>
